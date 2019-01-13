@@ -1,3 +1,5 @@
+print ("Press 'x' to exit the program")
+
 while True:
 
     number = input("Enter a number: ")
