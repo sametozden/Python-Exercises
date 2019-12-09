@@ -27,6 +27,7 @@ def start_game(countryname):
 
     guess = []
     remainguess=3
+    asterixfound = false
 
     while True:
 
@@ -37,12 +38,13 @@ def start_game(countryname):
             elif(letter==" "):
                 glue +=" "
             else:
+                asterixfound=true
                 glue +="*"
 
 
         print("Remain Guess: ", remainguess)
         print("Country Name: ", glue)
-        inp = input("Please write a letter or your guess").lower()
+        inp = input("Please write a letter or your guess: ").lower()
         guess.append(inp)
 
         if(countryname.find(inp) == -1):
@@ -52,7 +54,7 @@ def start_game(countryname):
             print("You're leaving from game. Bye Bye! Country name was: ", countryname)
             break
 
-        if(inp == countryname):
+        if(inp == countryname or asterixfound==false):
             print("Congrat! You'ra guess was right!")
             break
 
