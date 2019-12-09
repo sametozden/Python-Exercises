@@ -17,7 +17,19 @@ def new_game():
     except IOError as error:
         print ("Sorry, I can't open the source file :'(")
 
+def convertasterix(guess, countryname):
+    glue = ""
+    asterixfound = False
+    for letter in countryname:
+        if letter in guess:
+            glue += letter
+        elif (letter == " "):
+            glue += " "
+        else:
+            asterixfound = True
+            glue += "*"
 
+    return [asterixfound, glue]
 
 def start_game(countryname):
     print ("""
@@ -26,36 +38,28 @@ def start_game(countryname):
      """)
 
     guess = []
-    remainguess=3
-    asterixfound = false
+    remainguess = 3
 
     while True:
 
-        glue = ""
-        for letter in countryname:
-            if letter in guess:
-                glue += letter
-            elif(letter==" "):
-                glue +=" "
-            else:
-                asterixfound=true
-                glue +="*"
-
+        asterix = convertasterix(guess, countryname)
 
         print("Remain Guess: ", remainguess)
-        print("Country Name: ", glue)
+        print("Country Name: ", asterix[1])
         inp = input("Please write a letter or your guess: ").lower()
         guess.append(inp)
 
         if(countryname.find(inp) == -1):
             remainguess = remainguess - 1
 
+        asterixagain = convertasterix(guess, countryname)
+
         if (inp == "-q"):
             print("You're leaving from game. Bye Bye! Country name was: ", countryname)
             break
 
-        if(inp == countryname or asterixfound==false):
-            print("Congrat! You'ra guess was right!")
+        if(inp == countryname or asterixagain[0] == False):
+            print("Congrat! You're guess was right!")
             break
 
         if(remainguess==0):
